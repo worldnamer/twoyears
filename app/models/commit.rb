@@ -4,4 +4,12 @@ class Commit < ActiveRecord::Base
   # message : string 
 
   attr_accessible :commit_hash, :committed_at, :message
+
+  serialize :tags
+
+  after_initialize :default_values
+
+  def default_values
+    self.tags ||= []
+  end
 end
