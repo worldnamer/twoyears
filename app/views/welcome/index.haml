@@ -1,1 +1,6 @@
-Welcome
+%table.table.table-hover
+  - Commit.all.each do |commit|
+    %tr
+      %td= commit.commit_hash
+      %td{style: "width: 90px"}= l(commit.committed_at, format: :short)
+      %td= commit.message
