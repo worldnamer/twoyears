@@ -9,6 +9,15 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem "therubyracer"
+  gem "less-rails" # LESS stylesheets
 end
 
 gem 'jquery-rails'
+
+gem 'haml-rails' # markup templates
+
+gem 'rails_bootstrap_navbar', git: 'git://github.com/worldnamer/Rails-Bootstrap-Navbar' # Helper methods for Twitter Bootstrap navbars
+gem "twitter-bootstrap-rails"
+gem 'bootstrap-datepicker-rails'
