@@ -11,6 +11,16 @@ describe CommitFileParser do
     commit = Commit.where(commit_hash: "92e643c").first
     commit.should be_present
     commit.message.should == 'Fix for ticket 3460, clicking menu items on user page is fidgety. Removing :active on button_base so that opacity will stay at 100% for click events. This is required because for whatever reason, Chrome will send click events to background elements with higher opacity.'
-    commit.committed_at.should == Time.parse('Tue Feb 1 17:54:31 2012 -0700')
+    commit.committed_at.should == DateTime.strptime('Tue Feb 1 17:54:31 2012 -0700', '%a %b %d %H:%M:%S %Y %z')
+  end
+
+  it 'handles GMT dates' do
+    parser = CommitFileParser.new
+
+    parser.parse("spec/lib/commit_file_parser/success.txt")
+
+    commit = Commit.where(commit_hash: "7b1f786").first
+    commit.should be_present
+    commit.committed_at.should == DateTime.strptime('Tue Feb 21 14:15:10 2012 +0000', '%a %b %d %H:%M:%S %Y %z')
   end
 end
