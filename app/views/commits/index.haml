@@ -6,9 +6,11 @@
     %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
     %td 
       .commit-message {{ commit.message }}
-      .commit-tag{:"ng-repeat" => "tag in commit.tags"} 
-        {{ tag }}
-        %i.icon-remove
-      .add-tag.commit-tag.hidden
-        add
-        %i.icon-plus
+      .tags-container{style: "width: 100%; border: 1px solid red"}
+        .commit-tag{:"ng-repeat" => "(key, tag) in commit.tags", :"ng-click" => "removeTag(commit, key)"} 
+          {{ tag.text }}
+          %i.icon-remove
+        .add-tag.commit-tag{:"ng-click" => "addTag(commit)"}
+          add
+          %i.icon-plus
+        %input.hidden
