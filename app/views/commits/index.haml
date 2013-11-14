@@ -1,0 +1,7 @@
+%h2 Commits
+
+%table.table.table-hover
+  %tr{:"ng-repeat" => "commit in commits"}
+    %td {{ commit.commit_hash }}
+    %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
+    %td {{ commit.message }}
