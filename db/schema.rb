@@ -11,13 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113205719) do
+ActiveRecord::Schema.define(:version => 20131114231030) do
 
   create_table "commits", :force => true do |t|
     t.string   "commit_hash"
     t.datetime "committed_at"
     t.string   "message"
-    t.text     "tags"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.integer "commit_id"
+    t.string  "text"
   end
 
 end

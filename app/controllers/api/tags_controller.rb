@@ -14,7 +14,7 @@ module Api
       result = { }
       if @commit
         id = params[:id]
-        tag = @commit.tags.detect { |tag| tag[:text] == id }
+        tag = @commit.tags.detect { |tag| tag.text == id }
 
         # rename tag if text != id otherwise create
         text = params[:text]
@@ -24,7 +24,7 @@ module Api
           if tag
             result[:status] = :no_content
           else
-            @commit.tags << {text: text}
+            @commit.tags << Tag.new(text: text)
             @commit.save
 
             result[:status] = :created
@@ -32,7 +32,7 @@ module Api
         else
           if tag
             @commit.tags.delete(tag)
-            @commit.tags << {text: text}
+            @commit.tags << Tag.new(text: text)
             @commit.save
 
             result[:location] = text.gsub(' ', '%20')
@@ -41,7 +41,6 @@ module Api
             result[:status] = :not_found
           end
         end
-
       else
         result[:status] = :not_found
       end

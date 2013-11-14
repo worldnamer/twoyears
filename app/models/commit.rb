@@ -5,7 +5,7 @@ class Commit < ActiveRecord::Base
 
   attr_accessible :commit_hash, :committed_at, :message
 
-  serialize :tags
+  has_many :tags
 
   after_initialize :default_values
 

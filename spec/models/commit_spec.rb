@@ -10,11 +10,11 @@ describe Commit do
 
     commit.tags.should be_empty
 
-    commit.tags << {text: "tag"}
+    tag = Tag.new(text: "tag")
+    commit.tags << tag
 
     commit.save
-    commit.reload
 
-    commit.tags.should == [{text: "tag"}]
+    commit.reload.tags.should == [tag]
   end
 end
