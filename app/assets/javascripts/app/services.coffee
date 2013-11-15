@@ -4,8 +4,26 @@ angular
     ($resource) ->
       class Commit
         constructor: () ->
-          @service = $resource('/api/commits.json')
 
         all: () ->
-          @service.query()
+          $resource('/api/commits.json').query()
+
+        addTag: (commit, tag) ->
+          commit.tags.push({text: tag})
+
+          tag_for_uri = encodeURIComponent(tag)
+          resource = $resource("/api/commits/#{commit.commit_hash}/tags/#{tag_for_uri}", {}, 
+            update:
+              method: 'PUT'
+          )
+
+          resource.update(
+            text: tag
+          )
+
+        removeTag: (commit, index) ->
+          commit.tags.forEach (tag, i) ->
+            if i == index
+              removed = commit.tags.splice(i, 1)
+              $resource("/api/commits/#{commit.commit_hash}/tags/#{removed[0].text}").delete()
   );

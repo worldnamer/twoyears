@@ -3,7 +3,7 @@ module Api
     respond_to :json
 
     def index
-      respond_with Commit.all, include: :tags
+      respond_with Commit.includes(:tags).all, include: :tags
     end
   end
 end
