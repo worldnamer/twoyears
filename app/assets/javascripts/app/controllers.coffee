@@ -37,9 +37,12 @@ angular
             renderer: 'bar',
             dataURL: '/api/commits/tag_counts.json',
             onData: (data) ->
+              palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
               $scope.tags = []
+
               data.forEach((element) ->
                 $scope.tags.push(element)
+                element.color = palette.color();
               )
               data
             onComplete: (transport) ->
@@ -91,6 +94,8 @@ angular
             dataURL: '/api/commits/counts_by_day_as_rickshaw.json',
             onData: (data) ->
               # [{name: tag, color: #whatever, data: [positional counts] }]
+              palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
+
               data.forEach(
                 (series) ->
                   newdata = []
@@ -98,6 +103,7 @@ angular
                     time = 1329807600 + index * 86400
                     newdata.push { x: time, y: count }
                   series.data = newdata
+                  series.color = palette.color();
               )
               data
             onComplete: (transport) ->
