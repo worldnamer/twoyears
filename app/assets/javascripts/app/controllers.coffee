@@ -28,30 +28,17 @@ angular
       $scope.loadRickshaw = () ->
         graph = new Rickshaw.Graph.Ajax({
           element: document.querySelector("#chart"),
-          renderer: 'bar',
-          dataURL: '/api/commits/tag_counts.json',
+          renderer: 'line',
+          dataURL: '/api/commits/counts_by_day_as_rickshaw.json',
           onData: (data) ->
             console.log(data)
-            $scope.tags = []
-            data.forEach((element) ->
-              $scope.tags.push(element)
-            )
             data
           onComplete: (transport) ->
             graph = transport.graph;
 
-            xAxis = new Rickshaw.Graph.Axis.X({
+            xAxis = new Rickshaw.Graph.Axis.Time({
               graph: graph,
-              orientation: 'bottom',
-              element: document.querySelector('#x-axis'),
-              height: 20,
-              tickFormat: (n) ->
-                if n < $scope.tags.length
-                  $scope.tags[n].name
-                else
-                  console.log("tickFormat received for #{n} but there are only #{$scope.tags.length} elements.")
-                  ""
-            })
+            });
 
             xAxis.render();
 
@@ -65,6 +52,11 @@ angular
               graph: graph,
               element: document.querySelector('#legend'),
               naturalOrder: true
+            });
+
+            shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+              graph: graph,
+              legend: legend
             });
 
             highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
