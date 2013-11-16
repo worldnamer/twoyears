@@ -3,7 +3,7 @@ angular
   .controller('CommitsController', 
     ($scope, $timeout, Commit) ->
       commit_resource = new Commit()
-      
+
       $scope.reloadCommits = () ->
         $scope.commits = commit_resource.all()
 
@@ -40,28 +40,37 @@ angular
           onComplete: (transport) ->
             graph = transport.graph;
 
-            legend = new Rickshaw.Graph.Legend({
-              graph: graph,
-              element: document.querySelector('#legend')
-            });
-
-            highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-              graph: graph,
-              legend: legend
-            });
-
             xAxis = new Rickshaw.Graph.Axis.X({
               graph: graph,
               orientation: 'bottom',
+              element: document.querySelector('#x-axis'),
+              height: 20,
               tickFormat: (n) ->
-                $scope.tags[n].name
+                if n < $scope.tags.length
+                  $scope.tags[n].name
+                else
+                  console.log("tickFormat received for #{n} but there are only #{$scope.tags.length} elements.")
+                  ""
             })
+
+            xAxis.render();
 
             yAxis = new Rickshaw.Graph.Axis.Y({
               graph: graph
             });
 
             yAxis.render();
+
+            legend = new Rickshaw.Graph.Legend({
+              graph: graph,
+              element: document.querySelector('#legend'),
+              naturalOrder: true
+            });
+
+            highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+              graph: graph,
+              legend: legend
+            });
 
             # hoverDetail = new Rickshaw.Graph.HoverDetail( {
             #   graph: graph,
