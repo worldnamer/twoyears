@@ -27,5 +27,9 @@ module Api
 
       respond_with series #Tag.count_text()
     end
+
+    def counts_by_day_as_rickshaw
+      respond_with Tag.counts_by_day_as_rickshaw
+    end
   end
 end
