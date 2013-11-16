@@ -13,8 +13,6 @@ class Tag < ActiveRecord::Base
   def self.counts_by_day_as_rickshaw
     count_by_text = {}
 
-    # tags_per_day = select("date(committed_at), text, count(1) as tag_count").group("date(committed_at)").group("text").sort_by(&:committed_at)
-
     # get the earliest date
     earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at
 

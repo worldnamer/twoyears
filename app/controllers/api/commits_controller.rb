@@ -23,18 +23,21 @@ module Api
         i += 1
       end
 
-      respond_with series #Tag.count_text()
+      respond_with series
     end
 
     def counts_by_day_as_rickshaw
       result = []
       i = 0
+
       Tag.counts_by_day_as_rickshaw.each do |series, data|
         result << { name: series, data: data }
         i += 1
       end
 
-      respond_with({ first_day: 1329807600, series: result })
+      earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
+
+      respond_with({ first_day: earliest_date, series: result })
     end
   end
 end
