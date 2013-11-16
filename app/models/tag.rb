@@ -24,7 +24,7 @@ class Tag < ActiveRecord::Base
     # create a blank array for those dates
     blank_data = []
     earliest_date.to_date.upto(latest_date.to_date) do |date|
-      blank_data << { x: date.to_time.to_i, y: 0 }
+      blank_data << 0
     end
 
     series = {} # "tag" => [{x: date_as_integer, y: count_on_day}, ...]
@@ -34,13 +34,14 @@ class Tag < ActiveRecord::Base
 
       # for each tag per commit
       commit.tags.each do |tag|
-        #  create the blank array for that tag, if needed
+        # create the blank array for that tag, if needed
         series[tag.text.strip] ||= Marshal.load(Marshal.dump(blank_data))
 
-        #  fill in this day in that array
-        tuple_for_date = series[tag.text.strip].detect { |tuple| tuple[:x] == committed_at }
-        tuple_for_date[:y] ||= 0
-        tuple_for_date[:y] += 1
+        # fill in this day in that array
+        length_of_day = 86400
+        index_for_date = (committed_at - earliest_date.to_date.to_time.to_i)/86400
+        series[tag.text.strip][index_for_date] ||= 0
+        series[tag.text.strip][index_for_date] += 1
       end
     end
 

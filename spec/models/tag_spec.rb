@@ -25,8 +25,8 @@ describe Tag do
     Tag.create(commit: commit_two, text: "two")
 
     Tag.counts_by_day_as_rickshaw.should == {
-      "one" => [{x: Date.yesterday.to_time.to_i, y: 1}, {x: Date.today.to_time.to_i, y: 1}], 
-      "two" => [{x: Date.yesterday.to_time.to_i, y: 0}, {x: Date.today.to_time.to_i, y: 1}]
+      "one" => [1, 1], 
+      "two" => [0, 1]
     }
   end
 end
