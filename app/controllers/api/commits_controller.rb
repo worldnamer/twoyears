@@ -2,7 +2,7 @@ module Api
   class CommitsController < ApplicationController
     respond_to :json
 
-    COLORS = ["#CC0088", "#990088", "#991199", "#992299", "#993399", "#994499", "#995599", "#996699", "#997799", "#998899", "#999999", "#99AA99", "#99BB99", "#99CC99", "#99DD99", "#99EE99", "#99FF99", "#00FF99", "#00EE99", "#00DD99"]
+    COLORS = ["#CC0088", "#990088", "#991199", "#992299", "#993399", "#994499", "#995599", "#996699", "#997799", "#998899", "#999999", "#99AA99", "#99BB99", "#99CC99", "#99DD99", "#99EE99", "#99FF99", "#00FF99", "#00EE99", "#00DD99", "#00FF99", "#0099FF", "#00AAFF", "#00BBFF", "#00CCFF", "#00DDFF"]
 
     def index
       respond_with Commit.includes(:tags).all, include: :tags
@@ -29,7 +29,14 @@ module Api
     end
 
     def counts_by_day_as_rickshaw
-      respond_with Tag.counts_by_day_as_rickshaw
+      result = []
+      i = 0
+      Tag.counts_by_day_as_rickshaw.each do |series, data|
+        result << { name: series, data: data, color: COLORS[i]}
+        i += 1
+      end
+
+      respond_with result
     end
   end
 end
