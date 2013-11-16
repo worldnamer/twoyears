@@ -16,3 +16,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Don't check in this file; this is what we use to encypher the seed file
+/lib/string_shuffle.rb
