@@ -25,67 +25,126 @@ angular
   )
   .controller("TagsController",
     ($scope, $timeout, Tag) ->
-      $scope.loadRickshaw = () ->
-        graph = new Rickshaw.Graph.Ajax({
-          element: document.querySelector("#chart"),
-          renderer: 'line',
-          dataURL: '/api/commits/counts_by_day_as_rickshaw.json',
-          onData: (data) ->
-            # [{name: tag, color: #whatever, data: [positional counts] }]
-            data.forEach(
-              (series) ->
-                newdata = []
-                series.data.forEach (count, index) ->
-                  time = 1329807600 + index * 86400
-                  newdata.push { x: time, y: count }
-                series.data = newdata
-            )
-            data
-          onComplete: (transport) ->
-            graph = transport.graph;
+      $scope.tag_count = () ->
+        unless $("#overall").hasClass("active")
+          $("#tags .active").removeClass("active")
+          $("#overall").addClass("active")
 
-            xAxis = new Rickshaw.Graph.Axis.Time({
-              graph: graph,
-            });
+          $("#chart-container").html("<div id='chart'></div><div id='x-axis'></div><div id='legend'></div>")
 
-            xAxis.render();
+          graph = new Rickshaw.Graph.Ajax({
+            element: document.querySelector("#chart"),
+            renderer: 'bar',
+            dataURL: '/api/commits/tag_counts.json',
+            onData: (data) ->
+              $scope.tags = []
+              data.forEach((element) ->
+                $scope.tags.push(element)
+              )
+              data
+            onComplete: (transport) ->
+              graph = transport.graph;
 
-            yAxis = new Rickshaw.Graph.Axis.Y({
-              graph: graph
-            });
+              xAxis = new Rickshaw.Graph.Axis.X({
+                graph: graph,
+                orientation: 'bottom',
+                element: document.querySelector('#x-axis'),
+                height: 20,
+                tickFormat: (n) ->
+                  if n < $scope.tags.length
+                    $scope.tags[n].name
+                  else
+                    console.log("tickFormat received for #{n} but there are only #{$scope.tags.length} elements.")
+                    ""
+                })
 
-            yAxis.render();
+              xAxis.render();
 
-            legend = new Rickshaw.Graph.Legend({
-              graph: graph,
-              element: document.querySelector('#legend'),
-              naturalOrder: true
-            });
+              yAxis = new Rickshaw.Graph.Axis.Y({
+                graph: graph
+              });
 
-            shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-              graph: graph,
-              legend: legend
-            });
+              yAxis.render();
 
-            highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-              graph: graph,
-              legend: legend
-            });
+              legend = new Rickshaw.Graph.Legend({
+                graph: graph,
+                element: document.querySelector('#legend'),
+                naturalOrder: true
+              });
 
-            # hoverDetail = new Rickshaw.Graph.HoverDetail( {
-            #   graph: graph,
-            #   formatter: (series, x, y) ->
-            #     if y > 0
-            #       return "#{series.name}: #{y}"
-            #     else
-            #       return null;
+              highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+                graph: graph,
+                legend: legend
+              });
+          })
 
-            #   xFormatter: (x) ->
-            #     return ""
-            # });            
-        })
+      $scope.tag_count_by_day = () ->
+        unless $("#by-day").hasClass("active")
+          $("#tags .active").removeClass("active")
+          $("#by-day").addClass("active")
 
-      $timeout($scope.loadRickshaw, 0)
+          $("#chart-container").html("<div id='chart'></div><div id='x-axis'></div><div id='legend'></div>")
+
+          graph = new Rickshaw.Graph.Ajax({
+            element: document.querySelector("#chart"),
+            renderer: 'line',
+            dataURL: '/api/commits/counts_by_day_as_rickshaw.json',
+            onData: (data) ->
+              # [{name: tag, color: #whatever, data: [positional counts] }]
+              data.forEach(
+                (series) ->
+                  newdata = []
+                  series.data.forEach (count, index) ->
+                    time = 1329807600 + index * 86400
+                    newdata.push { x: time, y: count }
+                  series.data = newdata
+              )
+              data
+            onComplete: (transport) ->
+              graph = transport.graph;
+
+              xAxis = new Rickshaw.Graph.Axis.Time({
+                graph: graph
+              });
+
+              xAxis.render();
+
+              yAxis = new Rickshaw.Graph.Axis.Y({
+                graph: graph
+              });
+
+              yAxis.render();
+
+              legend = new Rickshaw.Graph.Legend({
+                graph: graph,
+                element: document.querySelector('#legend'),
+                naturalOrder: true
+              });
+
+              shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+                graph: graph,
+                legend: legend
+              });
+
+              highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+                graph: graph,
+                legend: legend
+              });
+
+              # hoverDetail = new Rickshaw.Graph.HoverDetail( {
+              #   graph: graph,
+              #   formatter: (series, x, y) ->
+              #     if y > 0
+              #       return "#{series.name}: #{y}"
+              #     else
+              #       return null;
+
+              #   xFormatter: (x) ->
+              #     return ""
+              # });            
+          })
+
+      $timeout($scope.tag_count_by_day, 0)
   );
 
 

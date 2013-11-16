@@ -2,7 +2,7 @@ module Api
   class CommitsController < ApplicationController
     respond_to :json
 
-    COLORS = ["#CC0088", "#990088", "#991199", "#992299", "#993399", "#994499", "#995599", "#996699", "#997799", "#998899", "#999999", "#99AA99", "#99BB99", "#99CC99", "#99DD99", "#99EE99", "#99FF99", "#00FF99", "#00EE99", "#00DD99", "#00FF99", "#0099FF", "#00AAFF", "#00BBFF", "#00CCFF", "#00DDFF"]
+    COLORS = ["#80ED12", "#A5D604", "#C7B601", "#E39209", "#F66C1C", "#FE4838", "#FB295B", "#ED1180", "#D504A6", "#B601C8", "#910AE3", "#6B1DF6", "#4739FE", "#285BFB", "#1181ED", "#03A6D5", "#01C8B5", "#0AE491", "#1DF66B", "#3AFE47", "#5CFB28", "#82EC10", "#A7D403", "#C9B401", "#E4900A", "#F76A1E", "#FE463A", "#FB275D", "#EC1082", "#D403A8", "#B401CA", "#8F0AE5"]
 
     def index
       respond_with Commit.includes(:tags).all, include: :tags
