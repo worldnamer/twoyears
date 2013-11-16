@@ -34,7 +34,7 @@ module Api
         i += 1
       end
 
-      respond_with result
+      respond_with({ first_day: 1329807600, series: result })
     end
   end
 end

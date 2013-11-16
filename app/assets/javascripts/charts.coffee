@@ -75,16 +75,16 @@ class @TagCountByDayChart extends RickshawChart
       dataURL: '/api/commits/counts_by_day_as_rickshaw.json',
       onData: (data) =>
         # [{name: tag, color: #whatever, data: [positional counts] }]
-        data.forEach(
+        data.series.forEach(
           (series) =>
             newdata = []
             series.data.forEach (count, index) ->
-              time = 1329807600 + index * 86400
+              time = data.first_day + index * 86400
               newdata.push { x: time, y: count }
             series.data = newdata
             series.color = @palette.color();
         )
-        data
+        data.series
       onComplete: (transport) =>
         graph = transport.graph;
 
