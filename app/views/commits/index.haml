@@ -1,6 +1,7 @@
-%h2 Commits
+.header
+  %h2{style: "float: left"} Commits
 
-#tags{:"ng-controller" => "TagsController", style: "margin-bottom: 10px"}
+#charts{:"ng-controller" => "TagsController", style: "margin-bottom: 10px; clear: both"}
   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
     %li#by-day
       %a{:"ng-click" => "tag_count_by_day()"} By Day
