@@ -1,9 +1,24 @@
+require 'csv'
+
 module Api
   class CommitsController < ApplicationController
-    respond_to :json
+    respond_to :json, :csv
 
     def index
-      respond_with Commit.includes(:tags).all, include: :tags
+      @commits = Commit.includes(:tags).all
+      respond_to do |format|
+        format.json { render json: @commits, include: :tags }
+        format.csv do 
+          text = CSV.generate do |csv|
+            csv << ["commit_hash", "committed_at", "message", "tags"]
+            @commits.each do |commit|
+              csv << [commit.commit_hash, commit.committed_at, commit.message, commit.tags.map(&:text).join(',')]
+            end
+          end
+
+          render text: text
+        end
+      end
     end
 
     def tag_counts
