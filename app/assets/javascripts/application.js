@@ -15,4 +15,5 @@
 //= require angular
 //= require angular-route
 //= require angular-resource
+//= require rickshaw_with_d3
 //= require_tree .

@@ -40,3 +40,5 @@ $ ->
           if val.length > 0
             eventObject.preventDefault()
   }, "tr input")
+# });
+ 

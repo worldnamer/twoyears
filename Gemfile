@@ -18,6 +18,8 @@ group :assets do
 
   gem "therubyracer"
   gem "less-rails" # LESS stylesheets
+
+  gem "rickshaw_rails" # Rickshaw for charts
 end
 
 gem 'jquery-rails'

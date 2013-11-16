@@ -1,13 +1,19 @@
 %h2 Commits
 
-%table.table.table-hover
-  %tr{:"ng-repeat" => "commit in commits"}
-    %td {{ commit.commit_hash }}
-    %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
-    %td 
-      .commit-message {{ commit.message }}
-      .tags-container
-        .commit-tag{:"ng-repeat" => "(key, tag) in commit.tags", :"ng-click" => "removeTag(commit, key)"} 
-          {{ tag.text }}
-          %i.icon-remove
-        %input
+#tags{:"ng-controller" => "TagsController", style: "margin-bottom: 10px"}
+  #chart
+  #legend-container
+    #legend
+
+#commits{:"ng-controller" => "CommitsController"}
+  %table.table.table-hover
+    %tr{:"ng-repeat" => "commit in commits"}
+      %td {{ commit.commit_hash }}
+      %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
+      %td 
+        .commit-message {{ commit.message }}
+        .tags-container
+          .commit-tag{:"ng-repeat" => "(key, tag) in commit.tags", :"ng-click" => "removeTag(commit, key)"} 
+            {{ tag.text }}
+            %i.icon-remove
+          %input

@@ -3,7 +3,6 @@ angular
   .config(
     ($routeProvider) ->
       $routeProvider.when('/', {
-        templateUrl: '/commits',
-        controller: 'CommitsController'
+        templateUrl: '/commits'
       }).otherwise({redirectTo: '/'})
   )
