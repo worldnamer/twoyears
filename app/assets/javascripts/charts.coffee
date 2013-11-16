@@ -57,7 +57,7 @@ class @TagCountChart extends RickshawChart
               ""
           })
 
-        xAxis.render(graph);
+        xAxis.render();
 
         @yaxis(graph);
 
