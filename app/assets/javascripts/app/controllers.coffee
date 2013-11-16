@@ -24,7 +24,7 @@ angular
       $timeout($scope.reloadCommits, 0)
   )
   .controller("TagsController",
-    ($scope, $timeout, Tag) ->
+    ($scope, $timeout) ->
       $scope.tag_count = () ->
         unless $("#overall").hasClass("active")
           $("#tags .active").removeClass("active")

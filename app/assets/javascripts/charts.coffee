@@ -54,7 +54,6 @@ class @TagCountChart extends RickshawChart
             if n < @tags.length
               @tags[n].name
             else
-              console.log("tickFormat received for #{n} but there are only #{@tags.length} elements.")
               ""
           })
 
