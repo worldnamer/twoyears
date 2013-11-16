@@ -1,3 +1,4 @@
-92e643c Tue Feb 1 17:54:31 2012 -0700 Fix for ticket 3460, clicking menu items on user page is fidgety. Removing :active on button_base so that opacity will stay at 100% for click events. This is required because for whatever reason, Chrome will send click events to background elements with higher opacity.
-7b1f786 Tue Feb 21 14:15:10 2012 +0000 Fix for ticket 3530, user profile name not aligned. Removed float from user profile name element, which allowed elipsis collapsing to occur.
-8706c9a Tue Feb 21 13:37:59 2012 -0600 Fix for ticket 3529: 'User menu is not aligned.', adjusted the styles for #user_menu and its container so that the menu would be absolutely positioning, right aligned to the parent.
+commit_hash,committed_at,message,tags
+92e643c,2012-02-01 00:54:31 UTC,"Fix for ticket 3460, clicking menu items on user page is fidgety. Removing :active on button_base so that opacity will stay at 100% for click events. This is required because for whatever reason, Chrome will send click events to background elements with higher opacity.","ui,bug"
+7b1f786,2012-02-21 21:15:10 UTC,"Fix for ticket 3530, user profile name not aligned. Removed float from user profile name element, which allowed elipsis collapsing to occur.","ui,bug"
+8706c9a,2012-02-21 20:37:59 UTC,"Fix for ticket 3529: 'User menu is not aligned.', adjusted the styles for #user_menu and its container so that the menu would be absolutely positioning, right aligned to the parent.","ui,super fly"
