@@ -7,7 +7,9 @@ module Api
     def index
       @commits = Commit.includes(:tags).all
       respond_to do |format|
-        format.json { render json: @commits, include: :tags }
+        format.json do
+          render json: @commits.to_json(include: {tags: {only: :text}}, except: [:id])
+        end
         format.csv do 
           text = CSV.generate do |csv|
             csv << ["commit_hash", "committed_at", "message", "tags"]
