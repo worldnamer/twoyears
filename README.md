@@ -1,4 +1,4 @@
-== TwoYears
+#TwoYears
 
 TwoYears is a toy project I've created to introspect on my latest job, which has just come to a close. It's a web-app, but it is intended to be single-user, and as such has no authentication or provision for uploading new information. It's mostly a way for me to visualize commit history.
 
@@ -21,3 +21,11 @@ and then use a browser to look at http://localhost:3000/#/
 Oh, and one more thing. The commit history in the seed file has been lightly encrypted to keep the focus on the visualization and architecture aspects of the tool. Please don't mess with that.
 
 -John
+
+##Next Steps
+ - Refactor Tag to be a many-to-many relationship with Commit to improve querying, and to support properties on tags
+ - Add tag page so I can see tag-specific charts, and set tag properties; particularly color
+ - Add repository to Commit so that I can add commits from my other projects from this time
+ - Create a GitHub commit hook to pull in new commits
+ - Create week/month views for charts so that larger trends can be seen more clearly
+ - Add correspondences chart so I can see what tags are likely to be paired with other tags
