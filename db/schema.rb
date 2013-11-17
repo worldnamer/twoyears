@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131117015206) do
+ActiveRecord::Schema.define(:version => 20131117083328) do
 
   create_table "commits", :force => true do |t|
     t.string   "commit_hash"
@@ -19,13 +19,21 @@ ActiveRecord::Schema.define(:version => 20131117015206) do
     t.string   "message"
   end
 
+  add_index "commits", ["commit_hash"], :name => "index_commits_on_commit_hash"
+  add_index "commits", ["committed_at"], :name => "index_commits_on_committed_at"
+
   create_table "commits_tags", :force => true do |t|
     t.integer "commit_id"
     t.integer "tag_id"
   end
 
+  add_index "commits_tags", ["commit_id", "tag_id"], :name => "index_commits_tags_on_commit_id_and_tag_id"
+  add_index "commits_tags", ["tag_id", "commit_id"], :name => "index_commits_tags_on_tag_id_and_commit_id"
+
   create_table "tags", :force => true do |t|
     t.string "text"
   end
+
+  add_index "tags", ["text"], :name => "index_tags_on_text"
 
 end
