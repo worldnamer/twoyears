@@ -1,13 +1,5 @@
 $ ->
   $(document).on({
-    mouseenter: (eventObject) ->
-      $(this).find(".add-tag").removeClass("hidden")
-    mouseleave: (eventObject) ->
-      $(this).find(".add-tag").addClass("hidden")
-  }, "tr")
-
-$ ->
-  $(document).on({
     keyup: (eventObject) ->
       $scope = angular.element($(this)).scope()
       key = eventObject.which
@@ -40,5 +32,3 @@ $ ->
           if val.length > 0
             eventObject.preventDefault()
   }, "tr input")
-# });
- 
