@@ -23,7 +23,7 @@ angular
 
       $timeout($scope.reloadCommits, 0)
   )
-  .controller("TagsController",
+  .controller("CommitsChartsController",
     ($scope, $timeout) ->
       $scope.totals = () ->
         unless $("#totals").hasClass("active")
