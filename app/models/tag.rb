@@ -1,8 +1,8 @@
 class Tag < ActiveRecord::Base
-  belongs_to :commit
+  has_and_belongs_to_many :commits
 
   # text : string
-  attr_accessible :commit, :text
+  attr_accessible :commits, :text
 
   def self.count_text
     count_by_text = {}

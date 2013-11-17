@@ -5,7 +5,7 @@ class Commit < ActiveRecord::Base
 
   attr_accessible :commit_hash, :committed_at, :message
 
-  has_many :tags
+  has_and_belongs_to_many :tags
 
   after_initialize :default_values
 
