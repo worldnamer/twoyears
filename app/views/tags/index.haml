@@ -1,0 +1,34 @@
+.header
+  %h3.float-left
+    %a{href: '#'} Commits
+  %h2.float-left{style: "margin-left: 10px;"} Tags
+  .float-right{style: "margin-top: 10px"} 
+    %i.icon-download-alt
+    %a{href: "/api/commits.csv"} Export
+
+/ #charts.clr{:"ng-controller" => "CommitsChartsController", style: "margin-bottom: 10px;"}
+/   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
+/     %li#totals
+/       %a{:"ng-click" => "totals()"} Totals
+/     %li#by-day
+/       %a{:"ng-click" => "tag_count_by_day()"} By Day
+/     %li#by-tag
+/       %a{:"ng-click" => "tag_count()"} By Tag
+
+/   #chart-container
+/     .chart
+/     .x-axis
+/     .legend
+
+/ #commits{:"ng-controller" => "CommitsController"}
+/   %table.table.table-hover
+/     %tr{:"ng-repeat" => "commit in commits"}
+/       %td {{ commit.commit_hash }}
+/       %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
+/       %td 
+/         .commit-message {{ commit.message }}
+/         .tags-container
+/           .commit-tag{:"ng-repeat" => "(key, tag) in commit.tags", :"ng-click" => "removeTag(commit, key)"} 
+/             {{ tag.text }}
+/             %i.icon-remove
+/           %input

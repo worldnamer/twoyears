@@ -4,5 +4,10 @@ angular
     ($routeProvider) ->
       $routeProvider.when('/', {
         templateUrl: '/commits'
-      }).otherwise({redirectTo: '/'})
+      })
+      .when('/tags', {
+        templateUrl: '/tags'
+      })
+      .otherwise({redirectTo: '/'})
+
   )

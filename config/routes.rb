@@ -12,6 +12,7 @@ Twoyears::Application.routes.draw do
   end
 
   resources :commits, only: [:index]
+  resources :tags, only: [:index]
 
   root :to => 'welcome#index'
 end
