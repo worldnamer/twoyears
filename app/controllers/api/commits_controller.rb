@@ -24,7 +24,7 @@ module Api
     end
 
     def tag_counts
-      tag_counts = Tag.count_text()
+      tag_counts = Tag.count_text().take(20)
 
       series = []
       i = 0

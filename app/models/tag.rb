@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
 
   def self.count_text
     count_by_text = {}
-    select("text, count(commits.id) as tag_count").joins(:commits).group("text").sort_by(&:tag_count).reverse.take(20).each { |tag| count_by_text[tag.text] = tag.tag_count }
+    select("text, count(commits.id) as tag_count").joins(:commits).group("text").sort_by(&:tag_count).reverse.each { |tag| count_by_text[tag.text] = tag.tag_count }
     count_by_text
   end
 
