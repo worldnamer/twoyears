@@ -25,6 +25,13 @@ angular
   )
   .controller("TagsController",
     ($scope, $timeout) ->
+      $scope.totals = () ->
+        unless $("#totals").hasClass("active")
+          $("#charts .active").removeClass("active")
+          $("#totals").addClass("active")
+
+          chart = new TotalsChart('#chart-container')
+
       $scope.tag_count = () ->
         unless $("#by-tag").hasClass("active")
           $("#charts .active").removeClass("active")
@@ -39,7 +46,7 @@ angular
 
           chart = new TagCountByDayChart('#chart-container')
 
-      $timeout($scope.tag_count_by_day, 0)
+      $timeout($scope.totals, 0)
   );
 
 

@@ -98,3 +98,49 @@ class @TagCountByDayChart extends RickshawChart
 
         @labeling(graph, true);          
     })
+
+class @TotalsChart extends RickshawChart
+  constructor: (@baseSelector) ->
+    super @baseSelector
+
+    graph = new Rickshaw.Graph.Ajax({
+      element: document.querySelector(".chart"),
+      renderer: 'line',
+      dataURL: '/api/commits/by_day.json',
+      onData: (data) =>
+        # first_day: 192318722, data: [positional counts]
+        newdata = []
+        newseries = {}
+        newseries.data = []
+        newseries.name = 'Commits'
+        newdata[0] = newseries
+        data.data.forEach(
+          (count, index) =>
+            time = data.first_day + index * 86400
+            newseries.data.push { x: time, y: count }
+        )
+        newseries.color = '#336699'
+        newdata
+      onComplete: (transport) =>
+        graph = transport.graph;
+
+        xAxis = new Rickshaw.Graph.Axis.Time({
+          graph: graph,
+          element: document.querySelector(".xaxis")
+        });
+
+        xAxis.render();
+
+        @yaxis(graph);
+
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph,
+          xFormatter: (x) ->
+            date = new Date(x*1000)
+            date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear()
+          formatter: (series, x, y) ->
+            (y|0) # Convert y to an integer
+        });
+
+        # @labeling(graph, true);          
+    })

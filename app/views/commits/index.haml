@@ -6,6 +6,8 @@
 
 #charts.clr{:"ng-controller" => "TagsController", style: "margin-bottom: 10px;"}
   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
+    %li#totals
+      %a{:"ng-click" => "totals()"} Totals
     %li#by-day
       %a{:"ng-click" => "tag_count_by_day()"} By Day
     %li#by-tag
