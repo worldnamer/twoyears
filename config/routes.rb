@@ -9,6 +9,8 @@ Twoyears::Application.routes.draw do
         get :by_day
       end
     end
+
+    resources :tags, only: [:index]
   end
 
   resources :commits, only: [:index]

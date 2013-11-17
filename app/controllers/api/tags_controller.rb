@@ -2,7 +2,7 @@ module Api
   class TagsController < ApplicationController
     respond_to :json
 
-    before_filter :find_commit
+    before_filter :find_commit, except: [:index]
 
     def find_commit
       if params[:commit_id]
@@ -11,6 +11,10 @@ module Api
 
         @tag = @commit.tags.detect { |tag| tag.text == @id }
       end
+    end
+
+    def index
+      respond_with Tag.count_text
     end
 
     def update
