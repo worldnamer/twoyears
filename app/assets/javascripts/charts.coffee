@@ -88,7 +88,8 @@ class @TagCountByDayChart extends RickshawChart
         graph = transport.graph;
 
         xAxis = new Rickshaw.Graph.Axis.Time({
-          graph: graph
+          graph: graph,
+          element: document.querySelector(".xaxis")
         });
 
         xAxis.render();

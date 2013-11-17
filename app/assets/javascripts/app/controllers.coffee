@@ -26,9 +26,9 @@ angular
   .controller("TagsController",
     ($scope, $timeout) ->
       $scope.tag_count = () ->
-        unless $("#overall").hasClass("active")
+        unless $("#by-tag").hasClass("active")
           $("#charts .active").removeClass("active")
-          $("#overall").addClass("active")
+          $("#by-tag").addClass("active")
 
           chart = new TagCountChart('#chart-container')
 
