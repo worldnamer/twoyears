@@ -25,24 +25,25 @@ angular
   )
   .controller("CommitsChartsController",
     ($scope, $timeout) ->
+      $scope.make_active = (toActivate) ->
+        $("#charts .active").removeClass("active")
+        $(toActivate).addClass("active")
+
       $scope.totals = () ->
         unless $("#totals").hasClass("active")
-          $("#charts .active").removeClass("active")
-          $("#totals").addClass("active")
+          $scope.make_active("#totals")
 
           chart = new TotalsChart('#chart-container')
 
       $scope.tag_count = () ->
         unless $("#by-tag").hasClass("active")
-          $("#charts .active").removeClass("active")
-          $("#by-tag").addClass("active")
+          $scope.make_active("#by-tag")
 
           chart = new TagCountChart('#chart-container')
 
       $scope.tag_count_by_day = () ->
         unless $("#by-day").hasClass("active")
-          $("#charts .active").removeClass("active")
-          $("#by-day").addClass("active")
+          $scope.make_active("#by-day")
 
           chart = new TagCountByDayChart('#chart-container')
 
