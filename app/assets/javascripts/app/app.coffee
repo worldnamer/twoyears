@@ -1,5 +1,5 @@
 angular
-	.module('twoyears', ['ngRoute', 'ngResource', 'twoyears.controllers', 'twoyears.services'])
+	.module('twoyears', ['ngRoute', 'ngResource', 'twoyears.commits', 'twoyears.tags'])
   .config(
     ($routeProvider) ->
       $routeProvider.when('/', {
@@ -9,5 +9,4 @@ angular
         templateUrl: '/tags'
       })
       .otherwise({redirectTo: '/'})
-
   )
