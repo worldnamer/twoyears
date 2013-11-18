@@ -50,6 +50,9 @@ angular
   )
   .controller("TagsController",
     ($scope, $timeout, Tag) ->
+      $scope.showTag = (tag) ->
+        $scope.$parent.shownTag = tag
+
       $scope.reloadTags = () ->
         tags = (new Tag).all()
 

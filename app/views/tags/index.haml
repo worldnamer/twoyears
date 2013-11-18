@@ -6,37 +6,18 @@
     %i.icon-download-alt
     %a{href: "/api/commits.csv"} Export
 
-#tags-list.clr{:"ng-controller" => "TagsController"}
-  .tag{:"ng-repeat" => "tag in tags"}
-    .inside-box{:"ng-style" => "{ width: tag.count, 'background-color': tag.color }"}
-      {{ tag.count > 50 ? tag.text : "&nbsp;" }}
-    .outside-box
-      {{ tag.count <= 50 ? tag.text : "" }} {{ tag.count }}
+#tags-view{:"ng-controller" => "TagsController"}
+  #tags-list.float-left.clr
+    .tag{:"ng-repeat" => "tag in tags"}
+      .inside-box{:"ng-style" => "{ width: tag.count, 'background-color': tag.color }"}
+        %a{:"ng-click" => "showTag(tag)", :"ng-show" => "tag.count > 50"} {{ tag.text }}
+        &nbsp;
+      .outside-box
+        %a{:"ng-click" => "showTag(tag)", :"ng-show" => "tag.count <= 50"} {{ tag.text }} 
+        {{ tag.count }}
 
-
-/ #charts.clr{:"ng-controller" => "CommitsChartsController", style: "margin-bottom: 10px;"}
-/   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
-/     %li#totals
-/       %a{:"ng-click" => "totals()"} Totals
-/     %li#by-day
-/       %a{:"ng-click" => "tag_count_by_day()"} By Day
-/     %li#by-tag
-/       %a{:"ng-click" => "tag_count()"} By Tag
-
-/   #chart-container
-/     .chart
-/     .x-axis
-/     .legend
-
-/ #commits{:"ng-controller" => "CommitsController"}
-/   %table.table.table-hover
-/     %tr{:"ng-repeat" => "commit in commits"}
-/       %td {{ commit.commit_hash }}
-/       %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
-/       %td 
-/         .commit-message {{ commit.message }}
-/         .tags-container
-/           .commit-tag{:"ng-repeat" => "(key, tag) in commit.tags", :"ng-click" => "removeTag(commit, key)"} 
-/             {{ tag.text }}
-/             %i.icon-remove
-/           %input
+  #tag-detail.float-left
+    .tag-text
+      {{ shownTag.text }}
+    .tag-count
+      {{ shownTag.count }}
