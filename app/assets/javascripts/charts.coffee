@@ -35,8 +35,8 @@ class @TagCountChart extends RickshawChart
       renderer: 'bar',
       dataURL: '/api/commits/tag_counts.json',
       onData: (data) =>
+        # [{name: tag text, data[{x:0, y:count (if series for index 0)}...]}]
         @tags = []
-
         data.forEach((element) =>
           @tags.push(element)
           element.color = @palette.color();
@@ -108,19 +108,16 @@ class @TotalsChart extends RickshawChart
       renderer: 'line',
       dataURL: '/api/commits/by_day.json',
       onData: (data) =>
-        # first_day: 192318722, data: [positional counts]
-        newdata = []
+        # [{first_day: 192318722, data: [positional counts]}]
         newseries = {}
-        newseries.data = []
         newseries.name = 'Commits'
-        newdata[0] = newseries
-        data.data.forEach(
-          (count, index) =>
-            time = data.first_day + index * 86400
-            newseries.data.push { x: time, y: count }
-        )
         newseries.color = '#336699'
-        newdata
+        newseries.data = []
+        data.data.forEach (count, index) =>
+          time = data.first_day + index * 86400 # 24 hours * 60 minutes * 60 seconds
+          newseries.data.push { x: time, y: count }
+        [newseries]
+
       onComplete: (transport) =>
         graph = transport.graph;
 
@@ -141,8 +138,6 @@ class @TotalsChart extends RickshawChart
           formatter: (series, x, y) ->
             (y|0) # Convert y to an integer
         });
-
-        # @labeling(graph, true);          
     })
 
 class @TagByDayOfWeekChart extends RickshawChart
@@ -154,15 +149,14 @@ class @TagByDayOfWeekChart extends RickshawChart
       renderer: 'bar',
       dataURL: "/api/tags/#{text}/by_day_of_week.json",
       onData: (data) =>
-        newdata = []
+        # [{data: [Sunday count,Monday count,...]}]
         newseries = {}
         newseries.data = []
         newseries.name = 'Commits'
-        newdata[0] = newseries
         data.data.forEach (count, index) =>
           newseries.data.push { x: index, y: count }
         newseries.color = '#336699'
-        newdata
+        [newseries]
 
       onComplete: (transport) =>
         graph = transport.graph
