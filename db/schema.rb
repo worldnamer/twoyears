@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131117083328) do
+ActiveRecord::Schema.define(:version => 20131118235029) do
 
   create_table "commits", :force => true do |t|
     t.string   "commit_hash"
     t.datetime "committed_at"
-    t.string   "message"
+    t.text     "message",      :limit => 255
   end
 
   add_index "commits", ["commit_hash"], :name => "index_commits_on_commit_hash"
