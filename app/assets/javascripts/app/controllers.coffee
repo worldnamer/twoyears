@@ -47,6 +47,19 @@ angular
           chart = new TagCountByDayChart('#chart-container')
 
       $timeout($scope.totals, 0)
+  )
+  .controller("TagsController",
+    ($scope, $timeout, Tag) ->
+      $scope.reloadTags = () ->
+        tags = (new Tag).all()
+
+        tags.$promise.then(() ->
+          palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
+          for tag in tags
+            tag.color = palette.color()
+        )
+
+        $scope.tags = tags
+
+      $timeout($scope.reloadTags, 0)
   );
-
-

@@ -6,6 +6,14 @@
     %i.icon-download-alt
     %a{href: "/api/commits.csv"} Export
 
+#tags-list.clr{:"ng-controller" => "TagsController"}
+  .tag{:"ng-repeat" => "tag in tags"}
+    .inside-box{:"ng-style" => "{ width: tag.count, 'background-color': tag.color }"}
+      {{ tag.count > 50 ? tag.text : "&nbsp;" }}
+    .outside-box
+      {{ tag.count <= 50 ? tag.text : "" }} {{ tag.count }}
+
+
 / #charts.clr{:"ng-controller" => "CommitsChartsController", style: "margin-bottom: 10px;"}
 /   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
 /     %li#totals
