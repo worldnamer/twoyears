@@ -45,4 +45,14 @@ class Tag < ActiveRecord::Base
 
     series
   end
+
+  def by_day_of_week
+    counts = [0,0,0,0,0,0,0] # Index 0 = Sunday
+    commits.each do |commit|
+      index = commit.committed_at.wday
+      counts[index] += 1
+    end
+
+    counts
+  end
 end

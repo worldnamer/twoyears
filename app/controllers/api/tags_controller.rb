@@ -65,5 +65,11 @@ module Api
 
       render result.merge({nothing: true})
     end
+
+    def by_day_of_week
+      tag = Tag.where(text: params[:id]).first
+
+      respond_with({data: tag.by_day_of_week})
+    end
   end
 end

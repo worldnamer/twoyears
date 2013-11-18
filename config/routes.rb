@@ -10,7 +10,11 @@ Twoyears::Application.routes.draw do
       end
     end
 
-    resources :tags, only: [:index]
+    resources :tags, only: [:index] do
+      member do
+        get :by_day_of_week
+      end
+    end
   end
 
   resources :commits, only: [:index]
