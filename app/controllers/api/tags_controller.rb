@@ -14,7 +14,7 @@ module Api
     end
 
     def index
-      respond_with Tag.count_text
+      respond_with Tag.count_text.map { |text, count| {text: text, count: count }}
     end
 
     def update
