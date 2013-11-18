@@ -26,44 +26,6 @@ class @RickshawChart
         legend: legend
       });
 
-class @TagCountChart extends RickshawChart
-  constructor: (@baseSelector) ->
-    super @baseSelector
-
-    graph = new Rickshaw.Graph.Ajax({
-      element: document.querySelector(".chart"),
-      renderer: 'bar',
-      dataURL: '/api/commits/tag_counts.json',
-      onData: (data) =>
-        # [{name: tag text, data[{x:0, y:count (if series for index 0)}...]}]
-        @tags = []
-        data.forEach((element) =>
-          @tags.push(element)
-          element.color = @palette.color();
-        )
-        data
-      onComplete: (transport) =>
-        graph = transport.graph;
-
-        xAxis = new Rickshaw.Graph.Axis.X({
-          graph: graph,
-          orientation: 'bottom',
-          element: document.querySelector('.x-axis'),
-          height: 20,
-          tickFormat: (n) =>
-            if n < @tags.length
-              @tags[n].name
-            else
-              ""
-          })
-
-        xAxis.render();
-
-        @yaxis(graph);
-
-        @labeling(graph);
-    })
-
 class @TagCountByDayChart extends RickshawChart
   constructor: (@baseSelector) ->
     super @baseSelector

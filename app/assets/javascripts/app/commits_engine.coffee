@@ -62,12 +62,6 @@ angular
 
           chart = new TotalsChart('#chart-container')
 
-      $scope.tag_count = () ->
-        unless $("#by-tag").hasClass("active")
-          $scope.make_active("#by-tag")
-
-          chart = new TagCountChart('#chart-container')
-
       $scope.tag_count_by_day = () ->
         unless $("#by-day").hasClass("active")
           $scope.make_active("#by-day")
