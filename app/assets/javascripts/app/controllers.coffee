@@ -53,6 +53,8 @@ angular
       $scope.showTag = (tag) ->
         $scope.$parent.shownTag = tag
 
+        chart = new TagByDayOfWeekChart('#chart-container', tag.text)
+
       $scope.reloadTags = () ->
         tags = (new Tag).all()
 

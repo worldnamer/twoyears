@@ -23,7 +23,6 @@ Oh, and one more thing. The commit history in the seed file has been lightly enc
 -John
 
 ##Next Steps
- - Add tag page so I can see tag-specific charts, and set tag properties; particularly color
  - Add repository to Commit so that I can add commits from my other projects from this time
  - Create a GitHub commit hook to pull in new commits
  - Create week/month views for charts so that larger trends can be seen more clearly

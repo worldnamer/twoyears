@@ -144,3 +144,39 @@ class @TotalsChart extends RickshawChart
 
         # @labeling(graph, true);          
     })
+
+class @TagByDayOfWeekChart extends RickshawChart
+  constructor: (@baseSelector, text) ->
+    super @baseSelector
+
+    graph = new Rickshaw.Graph.Ajax({
+      element: document.querySelector(".chart"),
+      renderer: 'bar',
+      dataURL: "/api/tags/#{text}/by_day_of_week.json",
+      onData: (data) =>
+        newdata = []
+        newseries = {}
+        newseries.data = []
+        newseries.name = 'Commits'
+        newdata[0] = newseries
+        data.data.forEach (count, index) =>
+          newseries.data.push { x: index, y: count }
+        newseries.color = '#336699'
+        newdata
+
+      onComplete: (transport) =>
+        graph = transport.graph
+
+        xAxis = new Rickshaw.Graph.Axis.X({
+          graph: graph,
+          orientation: 'bottom',
+          element: document.querySelector('.x-axis'),
+          height: 20,
+          tickFormat: (n) =>
+            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", ""][n]
+          })
+
+        xAxis.render()
+
+        @yaxis(graph);
+    });
