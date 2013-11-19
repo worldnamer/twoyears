@@ -14,7 +14,7 @@ module Api
     end
 
     def index
-      respond_with Tag.count_text.map { |text, count| {text: text, count: count }}.sort { |a, b| a[:count] <=> b[:count] }.reverse
+      respond_with Tag.count_text.map { |text, count| {text: text, count: count }}.sort { |a, b| a[:count].to_i <=> b[:count].to_i }.reverse
     end
 
     def update
