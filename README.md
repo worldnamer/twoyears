@@ -7,7 +7,8 @@ TwoYears is written in Rails 3, with Angular as a front-end technology. I'm usin
 If you want to see it in action, feel free to clone the project and run
 
 ```
-rake db:drop db:create db:migrate db:seed db:test:prepare
+rake db:drop db:create db:migrate
+rake db:seed db:test:prepare
 ```
 
 and then fire up Rails
