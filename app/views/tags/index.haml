@@ -1,7 +1,7 @@
 .header
-  %h3.float-left
+  .topnav.float-left
     %a{href: '#'} Commits
-  %h2.float-left{style: "margin-left: 10px;"} Tags
+  .topnav.float-left{style: "margin-left: 10px;"} Tags
   .float-right{style: "margin-top: 10px"} 
     %i.icon-download-alt
     %a{href: "/api/commits.csv"} Export
@@ -10,11 +10,10 @@
   #tags-list.float-left.clr
     .tag{:"ng-repeat" => "tag in tags"}
       .inside-box{:"ng-style" => "{ width: tag.count, 'background-color': tag.color }"}
-        %a{:"ng-click" => "showTag(tag)", :"ng-show" => "tag.count > 50"} {{ tag.text }}
-        &nbsp;
-      .outside-box
-        %a{:"ng-click" => "showTag(tag)", :"ng-show" => "tag.count <= 50"} {{ tag.text }} 
         {{ tag.count }}
+      .outside-box
+        %a{:"ng-click" => "showTag(tag)"} {{ tag.text }} 
+        
 
   #tag-detail.float-left
     .tag-text

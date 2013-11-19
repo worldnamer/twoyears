@@ -19,7 +19,7 @@ angular
         tags = (new Tag).all()
 
         tags.$promise.then(() ->
-          palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
+          palette = new Rickshaw.Color.Palette( { scheme: 'colorwheel' } );
           for tag in tags
             tag.color = palette.color()
         )

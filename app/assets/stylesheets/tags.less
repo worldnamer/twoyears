@@ -1,10 +1,9 @@
+@import "constants.less";
+@import "twoyears.less";
+
 #tags-list {
   width: 50%;
   border-right: 1px solid #CCCCCC;
-
-  .tag a:hover {
-    color: #00DDDD;
-  }
 }
 
 .tag .inside-box {
@@ -13,7 +12,7 @@
   border-top: 1px solid gray;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
-  margin: 5px;
+  margin: @vertical-spacing;
   padding: 10px;
 }
 
@@ -27,7 +26,6 @@
 }
 
 #tag-detail .tag-text {
-  font-size: 36px;
-  line-height: 36px;
+  .font-sizable(36px);
   margin-bottom: 10px;
 }

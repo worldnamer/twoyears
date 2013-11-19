@@ -1,3 +1,15 @@
+@import "constants.less";
+
+.font-sizable (@size) {
+  font-size: @size;
+  line-height: @size;
+}
+
+body {
+  .font-sizable(14px);
+  color: #0e0e0e;
+}
+
 .float-left {
   float: left;
 }
@@ -38,5 +50,23 @@
     display: inline-block;
     width: 100px;
     margin-left: 5px;
+  }
+}
+
+.topnav {
+  .font-sizable(1.6em);
+  margin-top: @vertical-spacing;
+  margin-bottom: @vertical-spacing;
+  font-weight: bold;
+
+  a {
+    font-weight: normal;
+    padding: 10px;
+
+    &:hover {
+      color: #005580;
+      background-color: #eeeeee;
+      text-decoration: none;
+    }
   }
 }
