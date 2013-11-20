@@ -2,8 +2,9 @@ class Commit < ActiveRecord::Base
   # commit_hash : string
   # committed_at : datetime
   # message : string 
+  # repository : string
 
-  attr_accessible :commit_hash, :committed_at, :message
+  attr_accessible :commit_hash, :committed_at, :message, :repository
 
   has_and_belongs_to_many :tags
 
