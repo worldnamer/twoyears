@@ -24,6 +24,8 @@ class ConvertTagsToFlyweight < ActiveRecord::Migration
     end
 
     remove_column :tags, :commit_id
+
+    Tag.reset_column_information
   end
 
   def down
@@ -51,5 +53,7 @@ class ConvertTagsToFlyweight < ActiveRecord::Migration
     end
 
     drop_table :commits_tags
+
+    Tag.reset_column_information
   end
 end
