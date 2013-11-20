@@ -1,0 +1,1 @@
+task :init => ["db:drop", "db:create", "db:migrate", "db:seed", "db:test:prepare"]
