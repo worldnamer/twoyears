@@ -24,7 +24,6 @@ Oh, and one more thing. The commit history in the seed file has been lightly enc
 -John
 
 ##Next Steps
- - Add repository to Commit so that I can add commits from my other projects from this time
  - Create a GitHub commit hook to pull in new commits
  - Create week/month views for charts so that larger trends can be seen more clearly
  - Add correspondences chart so I can see what tags are likely to be paired with other tags
