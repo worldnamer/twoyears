@@ -20,7 +20,13 @@
 
 #commits{:"ng-controller" => "CommitsController"}
   %table.table.table-hover
+    %tr
+      %th Repository
+      %th Hash
+      %th Time
+      %th Message
     %tr{:"ng-repeat" => "commit in commits"}
+      %td {{ commit.repository }}
       %td {{ commit.commit_hash }}
       %td{style: "width: 140px"} {{ commit.committed_at | date:'MM/dd/yyyy HH:mm:ss'}}
       %td 

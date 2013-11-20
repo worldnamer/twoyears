@@ -12,9 +12,9 @@ module Api
         end
         format.csv do 
           text = CSV.generate do |csv|
-            csv << ["commit_hash", "committed_at", "message", "tags"]
+            csv << ["repository", "commit_hash", "committed_at", "message", "tags"]
             @commits.each do |commit|
-              csv << [commit.commit_hash, commit.committed_at, commit.message, commit.tags.map(&:text).join(',')]
+              csv << [commit.repository, commit.commit_hash, commit.committed_at, commit.message, commit.tags.map(&:text).join(',')]
             end
           end
 
