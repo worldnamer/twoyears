@@ -3,12 +3,13 @@ require 'csv'
 class CommitFileParser
   def parse(filename)
     CSV.foreach(filename, headers: true) do |row|
-      commit_hash = row[0]
-      committed_at = row[1]
-      message = row[2]
-      tags = row[3].split(",")
+      repository = row[0]
+      commit_hash = row[1]
+      committed_at = row[2]
+      message = row[3]
+      tags = row[4].split(",")
 
-      commit = Commit.create(commit_hash: commit_hash, committed_at: committed_at, message: message)
+      commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
       tags.each do |tag_text|
         tag = Tag.where(text:tag_text).first
         if tag
