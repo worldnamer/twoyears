@@ -9,7 +9,7 @@
 #tags-view{:"ng-controller" => "TagsController"}
   #tags-list.float-left.clr
     .tag{:"ng-repeat" => "tag in tags"}
-      .inside-box{:"ng-style" => "{ width: tag.count, 'background-color': tag.color }"}
+      .inside-box{:"ng-style" => "{ width: tag.count/tagMax*340, 'background-color': tag.color }"}
         {{ tag.count }}
       .outside-box
         %a{:"ng-click" => "showTag(tag)"} {{ tag.text }} 

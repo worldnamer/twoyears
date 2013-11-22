@@ -20,8 +20,11 @@ angular
 
         tags.$promise.then(() ->
           palette = new Rickshaw.Color.Palette( { scheme: 'colorwheel' } );
+          tagMax = 0
           for tag in tags
             tag.color = palette.color()
+            tagMax = tag.count if tag.count > tagMax
+          $scope.tagMax = tagMax
         )
 
         $scope.tags = tags
