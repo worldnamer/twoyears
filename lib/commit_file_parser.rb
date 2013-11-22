@@ -7,7 +7,7 @@ class CommitFileParser
       commit_hash = row[1]
       committed_at = row[2]
       message = row[3]
-      tags = row[4].split(",")
+      tags = (row[4] || "").split(",")
 
       commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
       tags.each do |tag_text|
