@@ -14,6 +14,8 @@ Twoyears::Application.routes.draw do
         get :by_day_of_week
       end
     end
+
+    match 'github_commit_hook', to: 'github_commit_hook#hook', via: [:post]
   end
 
   resources :commits, only: [:index]

@@ -1,0 +1,84 @@
+{
+  "ref": "refs/heads/master",
+  "after": "67fe1fdb754e711d7518bae9b9d2f89183d4941f",
+  "before": "3b4967e1ba70c7975afde6e494ee45b0b2e8689e",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "compare": "https://github.com/worldnamer/twoyears/compare/3b4967e1ba70...67fe1fdb754e",
+  "commits": [
+    {
+      "id": "67fe1fdb754e711d7518bae9b9d2f89183d4941f",
+      "distinct": true,
+      "message": "Add scaling to tags display to keep it from line-breaking.\n\n: #ui #bug",
+      "timestamp": "2013-11-22T15:44:09-08:00",
+      "url": "https://github.com/worldnamer/twoyears/commit/67fe1fdb754e711d7518bae9b9d2f89183d4941f",
+      "author": {
+        "name": "John LeBoeuf-Little",
+        "email": "worldnamer@worldnamer.com",
+        "username": "worldnamer"
+      },
+      "committer": {
+        "name": "John LeBoeuf-Little",
+        "email": "worldnamer@worldnamer.com",
+        "username": "worldnamer"
+      },
+      "added": [],
+      "removed": [],
+      "modified": [
+        "app/assets/javascripts/app/tags_engine.coffee",
+        "app/views/tags/index.haml"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "67fe1fdb754e711d7518bae9b9d2f89183d4941f",
+    "distinct": true,
+    "message": "Add scaling to tags display to keep it from line-breaking.\n\n: #ui #bug",
+    "timestamp": "2013-11-22T15:44:09-08:00",
+    "url": "https://github.com/worldnamer/twoyears/commit/67fe1fdb754e711d7518bae9b9d2f89183d4941f",
+    "author": {
+      "name": "John LeBoeuf-Little",
+      "email": "worldnamer@worldnamer.com",
+      "username": "worldnamer"
+    },
+    "committer": {
+      "name": "John LeBoeuf-Little",
+      "email": "worldnamer@worldnamer.com",
+      "username": "worldnamer"
+    },
+    "added": [],
+    "removed": [],
+    "modified": [
+      "app/assets/javascripts/app/tags_engine.coffee",
+      "app/views/tags/index.haml"
+    ]
+  },
+  "repository": {
+    "id": 14457847,
+    "name": "twoyears",
+    "url": "https://github.com/worldnamer/twoyears",
+    "watchers": 0,
+    "stargazers": 0,
+    "forks": 0,
+    "fork": false,
+    "size": 760,
+    "owner": {
+      "name": "worldnamer",
+      "email": "worldnamer@worldnamer.com"
+    },
+    "private": false,
+    "open_issues": 0,
+    "has_issues": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "language": "Ruby",
+    "created_at": 1384646095,
+    "pushed_at": 1385163882,
+    "master_branch": "master"
+  },
+  "pusher": {
+    "name": "worldnamer",
+    "email": "worldnamer@worldnamer.com"
+  }
+}
