@@ -12,9 +12,14 @@ module Api
         message = commit["message"]
         committed_at = Time.parse(commit["timestamp"])
 
-        Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
+        commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
 
-        # tags = TagParser.parse(message)
+        tags = TagParser.parse(message)
+
+        tags.each do |tag|
+          commit.tags << tag
+        end
+        commit.save
       end
 
       render nothing: true
