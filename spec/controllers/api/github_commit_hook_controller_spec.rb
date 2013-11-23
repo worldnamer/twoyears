@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Api::GithubCommitHookController do
   describe 'POST hook' do
     it 'receives the hook information' do
-      example = JSON.parse(File.open("spec/lib/github_commit_hook/example.json") { |f| f.read })
+      example = File.open("spec/lib/github_commit_hook/example.json") { |f| f.read }
 
-      post :hook, example
+      post :hook, {payload: example}
 
       Commit.count.should == 1
       commit = Commit.first

@@ -3,9 +3,11 @@ module Api
     respond_to :json
 
     def hook
-      repository = params["repository"]["name"]
+      parsed_payload = JSON.parse(params[:payload])
+
+      repository = parsed_payload["repository"]["name"]
       
-      params["commits"].each do |commit|
+      parsed_payload["commits"].each do |commit|
         commit_hash = commit["id"]
         message = commit["message"]
         committed_at = Time.parse(commit["timestamp"])
