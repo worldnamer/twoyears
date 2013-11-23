@@ -27,7 +27,7 @@ class Commit < ActiveRecord::Base
       count_data << 0
     end
 
-    Commit.order(:committed_at).all.each do |commit|
+    Commit.order("committed_at DESC").all.each do |commit|
       committed_at = commit.committed_at.to_date.to_time.to_i
       index_for_date = (committed_at - earliest_date.to_date.to_time.to_i)/86400
       count_data[index_for_date] ||= 0

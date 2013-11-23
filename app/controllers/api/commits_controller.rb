@@ -5,7 +5,7 @@ module Api
     respond_to :json, :csv
 
     def index
-      @commits = Commit.includes(:tags).order(:committed_at).all
+      @commits = Commit.includes(:tags).order("committed_at DESC").all
       respond_to do |format|
         format.json do
           render json: @commits.to_json(include: {tags: {only: :text}}, except: [:id])
