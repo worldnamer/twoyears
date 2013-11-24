@@ -1,6 +1,6 @@
 class @RickshawChart
   constructor: (@baseSelector) ->
-    $(@baseSelector).html("<div class='chart'></div><div class='x-axis'></div><div class='legend'></div>")
+    $(@baseSelector).html("<div class='chart'></div><div class='x-axis'></div><div id='slider'></div><div class='legend'></div>")
     @palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
 
   yaxis: (graph) ->
@@ -56,9 +56,23 @@ class @TagCountByDayChart extends RickshawChart
 
         xAxis.render();
 
+        hoverDetail = new Rickshaw.Graph.HoverDetail({
+          graph: graph,
+          xFormatter: (x) ->
+            date = new Date(x*1000)
+            date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear()
+          formatter: (series, x, y) ->
+            series.name + ": " + (y|0) # Convert y to an integer
+        });
+
         @yaxis(graph);
 
-        @labeling(graph, true);          
+        @labeling(graph, true);
+
+        slider = new Rickshaw.Graph.RangeSlider({
+          graph: graph,
+          element: $('#slider')
+        });
     })
 
 class @TotalsChart extends RickshawChart
@@ -99,6 +113,11 @@ class @TotalsChart extends RickshawChart
             date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear()
           formatter: (series, x, y) ->
             (y|0) # Convert y to an integer
+        });
+
+        slider = new Rickshaw.Graph.RangeSlider({
+          graph: graph,
+          element: $('#slider')
         });
     })
 
