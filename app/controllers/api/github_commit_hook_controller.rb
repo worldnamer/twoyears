@@ -7,14 +7,14 @@ module Api
 
       repository = parsed_payload["repository"]["name"]
       
-      parsed_payload["commits"].each do |commit|
-        commit_hash = commit["id"]
-        message = commit["message"]
-        committed_at = Time.parse(commit["timestamp"])
+      parsed_payload["commits"].each do |commit_as_hash|
+        commit_hash = commit_as_hash["id"]
+        message = commit_as_hash["message"].split("\n").reject { |line| line.start_with? ":" }.join("\n")
+        committed_at = Time.parse(commit_as_hash["timestamp"])
 
         commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
 
-        tags = TagParser.parse(message)
+        tags = TagParser.parse(commit_as_hash["message"])
 
         tags.each do |tag|
           commit.tags << tag
