@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class TagsController < AngularController
   def index
   end
 end
