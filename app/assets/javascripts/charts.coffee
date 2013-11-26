@@ -1,7 +1,11 @@
 class @RickshawChart
-  constructor: (@baseSelector) ->
-    $(@baseSelector).html("<div class='chart'></div><div class='x-axis'></div><div id='slider'></div><div class='legend'></div>")
+  constructor: (@baseSelector, withLegend) ->
+    withLegend = false unless withLegend
+    $(@baseSelector).html(@resetHTML())
     @palette = new Rickshaw.Color.Palette( { scheme: 'munin' } );
+
+  resetHTML: () ->
+    "<div class='chart'></div><div class='x-axis'></div><div id='slider'></div><div class='legend'></div>"
 
   yaxis: (graph) ->
     yAxis = new Rickshaw.Graph.Axis.Y({ graph: graph });
@@ -76,13 +80,13 @@ class @TagCountByDayChart extends RickshawChart
     })
 
 class @TotalsChart extends RickshawChart
-  constructor: (@baseSelector) ->
+  constructor: (@baseSelector, period) ->
     super @baseSelector
 
     graph = new Rickshaw.Graph.Ajax({
       element: document.querySelector(".chart"),
       renderer: 'line',
-      dataURL: '/api/commits/by_day.json',
+      dataURL: "/api/commits/by_#{period}.json",
       onData: (data) =>
         # [{first_day: 192318722, data: [positional counts]}]
         newseries = {}
@@ -90,7 +94,9 @@ class @TotalsChart extends RickshawChart
         newseries.color = '#336699'
         newseries.data = []
         data.data.forEach (count, index) =>
-          time = data.first_day + index * 86400 # 24 hours * 60 minutes * 60 seconds
+          interval = index * 86400 # 24 hours * 60 minutes * 60 seconds
+          interval *= 7 if period == "week"
+          time = data.first_day + interval
           newseries.data.push { x: time, y: count }
         [newseries]
 
@@ -120,6 +126,9 @@ class @TotalsChart extends RickshawChart
           element: $('#slider')
         });
     })
+
+  resetHTML: () ->
+    "<div class='chart'></div><div class='x-axis'></div><div id='slider'></div>"
 
 class @TagByDayOfWeekChart extends RickshawChart
   constructor: (@baseSelector, text) ->

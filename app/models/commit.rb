@@ -36,4 +36,26 @@ class Commit < ActiveRecord::Base
 
     count_data
   end
+
+  def self.by_week
+    # get the earliest date
+    earliest_date = select("committed_at").order("committed_at asc").first.committed_at.to_date
+    earliest_year = earliest_date.year
+
+    # get the latest date
+    latest_date = select("committed_at").order("committed_at desc").first.committed_at.to_date
+    latest_year = latest_date.year
+
+    # create a blank array for those dates
+    count_data = [0] * (latest_date.cweek - earliest_date.cweek + (latest_year-earliest_year)*52) 
+
+    Commit.order("committed_at DESC").all.each do |commit|
+      index_for_date = commit.committed_at.to_date.cweek - earliest_date.cweek
+      index_for_date += (commit.committed_at.to_date.year - earliest_year)*52
+      count_data[index_for_date] ||= 0
+      count_data[index_for_date] += 1
+    end
+
+    count_data
+  end
 end

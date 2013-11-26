@@ -6,6 +6,7 @@ Twoyears::Application.routes.draw do
       collection do
         get :counts_by_day_as_rickshaw
         get :by_day
+        get :by_week
       end
     end
 

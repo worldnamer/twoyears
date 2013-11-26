@@ -42,5 +42,11 @@ module Api
 
       respond_with({ first_day: earliest_date, data: Commit.by_day })
     end
+
+    def by_week
+      earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
+
+      respond_with({ first_day: earliest_date, data: Commit.by_week })
+    end
   end
 end

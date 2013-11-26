@@ -9,14 +9,17 @@
 #charts.clr{:"ng-controller" => "CommitsChartsController", style: "margin-bottom: 10px;"}
   %ul.nav.nav-tabs{style: "margin-bottom: 0px;"}
     %li#totals
-      %a{:"ng-click" => "totals()"} Totals
+      %a{:"ng-click" => "totals('day')"} Totals
     %li#by-day
-      %a{:"ng-click" => "tag_count_by_day()"} By Day
+      %a{:"ng-click" => "tag_count_by_day()"} By Tag
 
   #chart-container
     .chart
     .x-axis
-    .legend
+
+  .periodicity{:"ng-show" => "totals_showing"}
+    %a.period.day.btn.btn-mini{:"ng-click" => "rerender_totals('day')"} By Day
+    %a.period.week.btn.btn-mini{:"ng-click" => "rerender_totals('week')"} By Week
 
 #commits{:"ng-controller" => "CommitsController"}
   %table.table.table-hover

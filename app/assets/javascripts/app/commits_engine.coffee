@@ -52,21 +52,34 @@ angular
   )
   .controller("CommitsChartsController",
     ($scope, $timeout) ->
+      $scope.totals_showing = true
+      $scope.period = "day"
+
       $scope.make_active = (toActivate) ->
         $("#charts .active").removeClass("active")
         $(toActivate).addClass("active")
 
-      $scope.totals = () ->
-        unless $("#totals").hasClass("active")
+      $scope.totals = (force) ->
+        if (!$("#totals").hasClass("active") or force)
           $scope.make_active("#totals")
 
-          chart = new TotalsChart('#chart-container')
+          chart = new TotalsChart('#chart-container', $scope.period)
+
+          $(".period").removeClass("btn-info")
+          $(".period.#{$scope.period}").addClass("btn-info")
+          $scope.totals_showing = true
+
+      $scope.rerender_totals = (period) ->
+        $scope.period = period
+        $scope.totals(true)
 
       $scope.tag_count_by_day = () ->
         unless $("#by-day").hasClass("active")
           $scope.make_active("#by-day")
 
           chart = new TagCountByDayChart('#chart-container')
+
+          $scope.totals_showing = false
 
       $timeout($scope.totals, 0)
   )
