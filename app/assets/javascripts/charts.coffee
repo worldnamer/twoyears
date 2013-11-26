@@ -110,7 +110,7 @@ class @TotalsChart extends RickshawChart
           graph: graph,
           xFormatter: (x) ->
             date = new Date(x*1000)
-            date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear()
+            date.getMonth()+1 + "-" + date.getDate() + "-" + date.getFullYear()
           formatter: (series, x, y) ->
             (y|0) # Convert y to an integer
         });
