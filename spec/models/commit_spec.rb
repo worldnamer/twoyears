@@ -20,7 +20,6 @@ describe Commit do
 
   it 'can return totals by day' do
     Timecop.freeze(Date.yesterday) do
-      # .select("text, count(1) as tag_count").group("text").sort_by(&:tag_count).map { |tag| [tag, tag.tag_count] }
       commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
       commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
     end
@@ -32,7 +31,6 @@ describe Commit do
 
   it 'returns intermediate days for totals' do
     Timecop.freeze(Date.yesterday.yesterday) do
-      # .select("text, count(1) as tag_count").group("text").sort_by(&:tag_count).map { |tag| [tag, tag.tag_count] }
       commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
       commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
     end
@@ -44,7 +42,6 @@ describe Commit do
 
   it 'can return totals by week' do
     Timecop.freeze(Date.new(2013,11,25) - 8.days) do
-      # .select("text, count(1) as tag_count").group("text").sort_by(&:tag_count).map { |tag| [tag, tag.tag_count] }
       commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
       commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
     end
@@ -58,7 +55,6 @@ describe Commit do
 
   it 'by week report functions past year boundary' do
     Timecop.freeze(Date.new(2013,12,29)) do
-      # .select("text, count(1) as tag_count").group("text").sort_by(&:tag_count).map { |tag| [tag, tag.tag_count] }
       commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
       commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
     end
@@ -68,5 +64,16 @@ describe Commit do
     end
 
     Commit.by_week.should == [2, 1]
+  end
+
+  it 'knows the earliest commit' do
+    commit_one = nil
+    Timecop.freeze(Date.yesterday) do
+      commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
+    end
+
+    commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
+
+    Commit.earliest_time.should == commit_one.committed_at
   end
 end

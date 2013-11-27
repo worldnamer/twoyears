@@ -16,7 +16,7 @@ class Commit < ActiveRecord::Base
 
   def self.by_day
     # get the earliest date
-    earliest_date = select("committed_at").order("committed_at asc").first.committed_at
+    earliest_date = earliest_time
 
     # get the latest date
     latest_date = select("committed_at").order("committed_at desc").first.committed_at
@@ -39,7 +39,7 @@ class Commit < ActiveRecord::Base
 
   def self.by_week
     # get the earliest date
-    earliest_date = select("committed_at").order("committed_at asc").first.committed_at.to_date
+    earliest_date = earliest_time.to_date
     earliest_year = earliest_date.year
 
     # get the latest date
@@ -57,5 +57,9 @@ class Commit < ActiveRecord::Base
     end
 
     count_data
+  end
+
+  def self.earliest_time
+    select("committed_at").order("committed_at asc").first.committed_at
   end
 end

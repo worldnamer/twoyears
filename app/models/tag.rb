@@ -14,7 +14,7 @@ class Tag < ActiveRecord::Base
     count_by_text = {}
 
     # get the earliest date
-    earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at
+    earliest_date = Commit.earliest_time
 
     # get the latest date
     latest_date = Commit.select("committed_at").order("committed_at desc").first.committed_at

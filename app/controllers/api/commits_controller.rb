@@ -32,13 +32,13 @@ module Api
         i += 1
       end
 
-      earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
+      earliest_date = Commit.earliest_time.to_date.to_time.to_i
 
       respond_with({ first_day: earliest_date, series: result })
     end
 
     def by_period
-      earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
+      earliest_date = Commit.earliest_time.to_date.to_time.to_i
 
       if params[:period] == "week"
         data = Commit.by_week
