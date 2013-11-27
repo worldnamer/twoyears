@@ -37,16 +37,16 @@ module Api
       respond_with({ first_day: earliest_date, series: result })
     end
 
-    def by_day
+    def by_period
       earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
 
-      respond_with({ first_day: earliest_date, data: Commit.by_day })
-    end
+      if params[:period] == "week"
+        data = Commit.by_week
+      else
+        data = Commit.by_day
+      end
 
-    def by_week
-      earliest_date = Commit.select("committed_at").order("committed_at asc").first.committed_at.to_date.to_time.to_i
-
-      respond_with({ first_day: earliest_date, data: Commit.by_week })
+      respond_with({ first_day: earliest_date, data: data })
     end
   end
 end

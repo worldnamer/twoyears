@@ -86,7 +86,7 @@ class @TotalsChart extends RickshawChart
     graph = new Rickshaw.Graph.Ajax({
       element: document.querySelector(".chart"),
       renderer: 'line',
-      dataURL: "/api/commits/by_#{period}.json",
+      dataURL: "/api/commits/by_period.json?period=#{period}",
       onData: (data) =>
         # [{first_day: 192318722, data: [positional counts]}]
         newseries = {}
