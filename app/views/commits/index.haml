@@ -20,6 +20,7 @@
   .periodicity{:"ng-show" => "totals_showing"}
     %a.period.day.btn.btn-mini{:"ng-click" => "rerender_totals('day')"} By Day
     %a.period.week.btn.btn-mini{:"ng-click" => "rerender_totals('week')"} By Week
+    %a.period.month.btn.btn-mini{:"ng-click" => "rerender_totals('month')"} By Month
 
 #commits{:"ng-controller" => "CommitsController"}
   %table.table.table-hover

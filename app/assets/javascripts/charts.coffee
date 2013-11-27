@@ -96,6 +96,7 @@ class @TotalsChart extends RickshawChart
         data.data.forEach (count, index) =>
           interval = index * 86400 # 24 hours * 60 minutes * 60 seconds
           interval *= 7 if period == "week"
+          interval *= 30 if period == "month"
           time = data.first_day + interval
           newseries.data.push { x: time, y: count }
         [newseries]
