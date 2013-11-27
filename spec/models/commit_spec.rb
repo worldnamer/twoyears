@@ -66,6 +66,19 @@ describe Commit do
     Commit.by_week.should == [2, 1]
   end
 
+  it 'can return totals by month' do
+    Timecop.freeze(Date.new(2013,11,25) - 2.months) do
+      commit_one = Commit.create(repository: "asdf", commit_hash: "1", committed_at: Time.now, message: "1")
+      commit_two = Commit.create(repository: "asdf", commit_hash: "2", committed_at: Time.now, message: "2")
+    end
+
+    Timecop.freeze(Date.new(2013,11,25)) do
+      commit_three = Commit.create(repository: "asdf", commit_hash: "3", committed_at: Time.now, message: "2")
+    end
+
+    Commit.by_month.should == [2, 0, 1]
+  end
+
   it 'knows the earliest commit' do
     commit_one = nil
     Timecop.freeze(Date.yesterday) do

@@ -15,10 +15,8 @@ class Commit < ActiveRecord::Base
   end
 
   def self.by_day
-    # get the earliest date
     earliest_date = earliest_time
 
-    # get the latest date
     latest_date = select("committed_at").order("committed_at desc").first.committed_at
 
     # create a blank array for those dates
@@ -52,6 +50,28 @@ class Commit < ActiveRecord::Base
     Commit.order("committed_at DESC").all.each do |commit|
       index_for_date = commit.committed_at.to_date.cweek - earliest_date.cweek
       index_for_date += (commit.committed_at.to_date.year - earliest_year)*52
+      count_data[index_for_date] ||= 0
+      count_data[index_for_date] += 1
+    end
+
+    count_data
+  end
+
+  def self.by_month
+    # get the earliest date
+    earliest_date = earliest_time.to_date
+    earliest_year = earliest_date.year
+
+    # get the latest date
+    latest_date = select("committed_at").order("committed_at desc").first.committed_at.to_date
+    latest_year = latest_date.year
+
+    # create a blank array for those dates
+    count_data = [0] * (latest_date.month - earliest_date.month + (latest_year-earliest_year)*12) 
+
+    Commit.order("committed_at DESC").all.each do |commit|
+      index_for_date = commit.committed_at.to_date.month - earliest_date.month
+      index_for_date += (commit.committed_at.to_date.year - earliest_year)*12
       count_data[index_for_date] ||= 0
       count_data[index_for_date] += 1
     end

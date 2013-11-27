@@ -42,6 +42,8 @@ module Api
 
       if params[:period] == "week"
         data = Commit.by_week
+      elsif params[:period] == "month"
+        data = Commit.by_month
       else
         data = Commit.by_day
       end
