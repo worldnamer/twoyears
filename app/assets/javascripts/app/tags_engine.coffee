@@ -23,7 +23,8 @@ angular
           tagMax = 0
           for tag in tags
             tag.color = palette.color()
-            tagMax = tag.count if tag.count > tagMax
+            tagMax = parseInt(tag.count) if parseInt(tag.count) > parseInt(tagMax)
+            
           $scope.tagMax = tagMax
         )
 
