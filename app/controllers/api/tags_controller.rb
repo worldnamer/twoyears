@@ -55,8 +55,9 @@ module Api
     def destroy
       result = { }
 
-      if @tag
-        @tag.destroy
+      if @tag and @commit
+        debugger
+        @commit.tags.delete(@tag)
 
         result[:status] = :no_content
       else
