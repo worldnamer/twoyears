@@ -37,9 +37,9 @@
     %link(href='http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC' rel='stylesheet' type='text/css')
   %body
     = nav_bar fixed: :top, brand: "TwoYears", responsive: true, inverse: true do
-      / = menu_group do
-      /   - if user_signed_in?
-      /     = menu_item "Sign out", destroy_user_session_path(subdomain: "")
+      = menu_group do
+        - if user_signed_in?
+          = menu_item "Sign out", destroy_user_session_path(subdomain: "")
 
     .container-fluid
       .row-fluid

@@ -1,4 +1,6 @@
 Twoyears::Application.routes.draw do
+  devise_for :users
+
   namespace :api do
     resources :commits, only: [:index] do
       resources :tags, only: [:update, :destroy] do
