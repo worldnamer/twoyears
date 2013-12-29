@@ -9,7 +9,8 @@ class CommitFileParser
       message = row[3]
       tags = (row[4] || "").split(",")
 
-      commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
+      user = User.first
+      commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message, user: user)
       tags.each do |tag_text|
         tag = Tag.where(text:tag_text).first
         if tag

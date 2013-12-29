@@ -5,7 +5,7 @@ module Api
     respond_to :json, :csv
 
     def index
-      @commits = Commit.includes(:tags).order("committed_at DESC").all
+      @commits = Commit.where(user_id: current_user.id).includes(:tags).order("committed_at DESC").all
       respond_to do |format|
         format.json do
           render json: @commits.to_json(include: {tags: {only: :text}}, except: [:id])
@@ -32,13 +32,13 @@ module Api
         i += 1
       end
 
-      earliest_date = Commit.earliest_time.to_date.to_time.to_i
+      earliest_date = Commit.where(user_id: current_user.id).earliest_time.to_date.to_time.to_i
 
       respond_with({ first_day: earliest_date, series: result })
     end
 
     def by_period
-      earliest_date = Commit.earliest_time.to_date.to_time.to_i
+      earliest_date = Commit.where(user_id: current_user.id).earliest_time.to_date.to_time.to_i
 
       if params[:period] == "week"
         data = Commit.by_week

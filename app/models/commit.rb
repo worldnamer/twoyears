@@ -4,11 +4,13 @@ class Commit < ActiveRecord::Base
   # message : string 
   # repository : string
 
-  attr_accessible :commit_hash, :committed_at, :message, :repository
+  attr_accessible :commit_hash, :committed_at, :message, :repository, :user
 
   has_and_belongs_to_many :tags
 
   after_initialize :default_values
+
+  belongs_to :user
 
   def default_values
     self.tags ||= []

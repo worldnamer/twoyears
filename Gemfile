@@ -24,6 +24,7 @@ group :test do
   gem 'database_cleaner', '~> 1.0.1' # JWLL: There's a bug in 1.1 that expects postgresql even if you're not using it
   gem 'debugger'
   gem 'timecop'
+  gem 'factory_girl_rails', ">= 4.0" # Fixtures
 end
 
 group :assets do

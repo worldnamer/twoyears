@@ -12,7 +12,8 @@ module Api
         message = commit_as_hash["message"].split("\n").reject { |line| line.start_with? ":" }.join("\n")
         committed_at = Time.parse(commit_as_hash["timestamp"])
 
-        commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message)
+        user = User.find_by_email(commit_as_hash['author']['email'])
+        commit = Commit.create(repository: repository, commit_hash: commit_hash, committed_at: committed_at, message: message, user: user)
 
         tags = TagParser.parse(commit_as_hash["message"])
 

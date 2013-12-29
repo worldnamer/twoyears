@@ -11,17 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131229201823) do
+ActiveRecord::Schema.define(:version => 20131229202739) do
 
   create_table "commits", :force => true do |t|
     t.string   "commit_hash"
     t.datetime "committed_at"
     t.text     "message",      :limit => 255
     t.string   "repository"
+    t.integer  "user_id"
   end
 
   add_index "commits", ["commit_hash"], :name => "index_commits_on_commit_hash"
   add_index "commits", ["committed_at"], :name => "index_commits_on_committed_at"
+  add_index "commits", ["user_id"], :name => "index_commits_on_user_id"
 
   create_table "commits_tags", :force => true do |t|
     t.integer "commit_id"

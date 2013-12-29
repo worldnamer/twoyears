@@ -6,7 +6,7 @@ module Api
 
     def find_commit
       if params[:commit_id]
-        @commit = Commit.where(commit_hash: params[:commit_id]).first
+        @commit = Commit.where(user_id: current_user.id).where(commit_hash: params[:commit_id]).first
         @id = params[:id]
 
         @tag = @commit.tags.detect { |tag| tag.text == @id }
